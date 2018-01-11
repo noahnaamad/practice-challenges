@@ -1,6 +1,6 @@
 def find_array_quadruplet(arr, s):
     sums = pairs(arr, s)
-    return possible_pairings(sums)
+    return possible_pairings(sums, s)
 
 def pairs(arr, s):
   arr_len = len(arr)
@@ -23,10 +23,12 @@ def possible_pairings(sums, s):
   for k in range(0, len(list_sums)):
     for l in range(0, len(list_sums)):
       if list_sums[k] + list_sums[l] == s:
-        candidates = [sums[k], sums[l]]
-        if find_exclusivity(candidates)[0]:
-          return find_exclusivity(candidates)[1]
-  return false
+        cand1 = sums[list_sums[k]]
+        cand2 = sums[list_sums[l]]
+        candidates = [cand1, cand2]
+        if find_exclusive_quad(candidates)[0]:
+          return find_exclusive_quad(candidates)[1]
+  return False
 
 def find_exclusive_quad(pairings):
     ##find four indices with no repeats
@@ -49,5 +51,12 @@ def find_exclusive_quad(pairings):
 # find_exclusive_quad([[[1,2],[2,3]],[[2,4], [2,5], [5,2]]])
 
 #possible_pairings
-x = {10:[[1,2][3,4]]}
-possible_pairings()
+x = {10:[[1,2],[3,4]], 5:[[2,3],[1,5]], 6:[[1,4]]}
+print "1"
+possible_pairings(x, 20)
+print ""
+print"2"
+possible_pairings(x, 15)
+print ""
+print"3"
+possible_pairings(x, 16)
